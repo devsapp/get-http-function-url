@@ -1,0 +1,25 @@
+edition: 1.0.0 #  命令行YAML规范版本，遵循语义化版本（Semantic Versioning）规范
+name: component-test #  项目名称
+access: dankun # 密钥别名
+# access: wss-root # 密钥别名
+vars: # 全局变量
+  # region: cn-beijing
+  region: cn-shenzhen
+  service:
+    name: test-wss
+    description: "hello world by serverless devs"
+
+services:
+  component:
+    component: fc
+    actions:
+      pre-deploy:
+        - plugin: ${path(..)}
+          args:
+            region: ap-southeast-1
+            serviceName: serverless-cd-wss
+            functionName: trigger
+            envKey: WEBHOOKURL
+    props:
+      region: ${vars.region}
+      service: ${vars.service}
