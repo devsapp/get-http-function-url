@@ -15,6 +15,8 @@ async function index(inputs, { region, functionName, serviceName, envKey = 'WEBH
     functionName,
   }));
 
+  core.Logger.debug('get http url', JSON.stringify(remote));
+
   const latestHttpConfig = _.find(
     _.get(remote, 'triggers', []),
     (o) => {
