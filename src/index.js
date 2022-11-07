@@ -40,7 +40,7 @@ async function getRemoteConfig(fcInfo, cloneInputs, props) {
   try {
     return await fcInfo.info(cloneInputs);
   } catch (ex) {
-    if (ex.code?.endsWith('NotFound')) {
+    if (ex && ex.code && ex.code.endsWith('NotFound')) {
       return {};
     }
     throw ex;
